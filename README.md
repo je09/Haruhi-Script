@@ -28,9 +28,9 @@ You're **awesome**! Now you can use "haruhi" command to interact with Haruhi-Scr
 
 ## How to use it?
 
-![Screen][screen]
+![Screen][screen_2]
 
-[screen]: https://github.com/je09/Haruhi-Script/raw/master/images/screen_2.gif
+[screen_2]: https://github.com/je09/Haruhi-Script/raw/master/images/screen_2.gif
 
 ### Found a bug? You're welcome! Send me an issue!
 
