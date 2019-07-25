@@ -18,7 +18,7 @@ Change directory to Haruhi-Script with:
 cd Haruhi-Script
 ```
 
-And build it with your version of pip like so:
+And build it with your version of pip like so (python 3.5 and higher):
 
 ```bash
 pip install .
@@ -34,4 +34,4 @@ You're **awesome**! Now you can use "haruhi" command to interact with Haruhi-Scr
 
 ### Found a bug? You're welcome! Send me an issue!
 
-##### *P.S. I din't test it on Windows or Linux*
+##### *P.S. I din't test it on Windows*
