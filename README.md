@@ -9,7 +9,7 @@
 You can clone this repository with:
 
 ```bash
-git clone git@github.com:je09/Haruhi-Script.git
+git clone https://github.com/je09/Haruhi-Script.git
 ```
 
 Change directory to Haruhi-Script with:
