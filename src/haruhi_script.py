@@ -63,12 +63,15 @@ def save_chapter(manga_id, path, base_url, headers):
     data = r.json()
 
     manga_hash = data['hash']
+    chapter = data['chapter']
     server = data['server']
     if server == '/data/':
         server = 'https://mangadex.org/data/'
+    if not chapter:
+        chapter = '1'
 
-    path = '{0}/Chapter-{1}'.format(path, data['chapter'])
-    click.echo('\nDownloading chapter {0}'.format(data['chapter']))
+    path = '{0}/Chapter-{1}'.format(path, chapter)
+    click.echo('\nDownloading chapter {0}'.format(chapter))
 
     exists = Path.exists(Path(path))
 
@@ -139,12 +142,18 @@ def find_chapters(lang, data, title, default_name, base_url, headers):
     click.echo('Result: {0}'.format(result))
     if result:
         path = make_save_dir(lang, title, default_name)
+        manga_list = []
         for manga_id, chapter in data.items():
             if chapter['lang_code'] == lang:
-                save_chapter(manga_id, path, base_url, headers)
-                click.echo()
+                manga_list.append(manga_id)
+        del data
 
-def print_version(ctx, param, value):
+        for i in range(len(manga_list)-1, 0, -1):
+                save_chapter(manga_list[i], path, base_url, headers)
+                click.echo()
+        del manga_list
+
+def print_version(ctx, _, value):
     VERSION = '0.8'
 
     if not value or ctx.resilient_parsing:
