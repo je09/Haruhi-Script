@@ -9,7 +9,7 @@
 You can clone this repository with:
 
 ```bash
-git clone git@github.com:je09/Haruhi-Script.git
+git clone https://github.com/je09/Haruhi-Script.git
 ```
 
 Change directory to Haruhi-Script with:
@@ -18,7 +18,7 @@ Change directory to Haruhi-Script with:
 cd Haruhi-Script
 ```
 
-And build it with your version of pip like so:
+And build it with your version of pip like so (python 3.5 and higher):
 
 ```bash
 pip install .
@@ -28,10 +28,10 @@ You're **awesome**! Now you can use "haruhi" command to interact with Haruhi-Scr
 
 ## How to use it?
 
-![Screen][screen]
+![Screen][screen_2]
 
-[screen]: https://github.com/je09/Haruhi-Script/raw/master/images/screen_2.gif
+[screen_2]: https://github.com/je09/Haruhi-Script/raw/master/images/screen_2.gif
 
 ### Found a bug? You're welcome! Send me an issue!
 
-##### *P.S. I din't test it on Windows or Linux*
+##### *P.S. I din't test it on Windows*
