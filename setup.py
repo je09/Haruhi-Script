@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='Haruhi-Script',
-    version='0.8',
+    version='0.9',
     author='je09',
     author_email='je09@yandex.ru',
     description='A simple parser/downloader of/from mangadex.org',

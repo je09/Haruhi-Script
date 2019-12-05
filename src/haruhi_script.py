@@ -1,5 +1,5 @@
 """
-Haruhi Script V. 0.8
+Haruhi Script V. 0.9
 je09 22.07.2019
 
 A mangadex parser/downloader
@@ -8,11 +8,13 @@ Named after Haruhi Suzumiya
 """
 
 import json
+import re
 from pathlib import Path
 from sys import stdout, exit
 
 import click
 import requests
+
 
 def get_manga_id(manga_path, base_url):
     manga_id = manga_path
@@ -30,6 +32,7 @@ def get_manga_id(manga_path, base_url):
         exit('Invalid link or id')
 
     return manga_id
+
 
 def get_manga_details(manga_id, base_url, headers):
     API_ENDPOINT = base_url.format('api/manga/{0}')
@@ -52,6 +55,7 @@ def get_manga_details(manga_id, base_url, headers):
     ))
 
     return details['chapter'], meta['title']
+
 
 def save_chapter(manga_id, path, base_url, headers):
     API_ENDPOINT = base_url.format('/api/?id={0}&type=chapter&baseURL=%2Fapi')
@@ -93,6 +97,7 @@ def save_chapter(manga_id, path, base_url, headers):
     if exists:
         click.echo('A folder with this chapter already exists. Skipping.', nl=False)
 
+
 def write_config(config_path, path):
     path = '/' + path.strip('/')
     with open(config_path, 'w', encoding='utf-8') as config_file:
@@ -102,6 +107,7 @@ def write_config(config_path, path):
             }
         )
         config_file.writelines(config)
+
 
 def make_save_dir(lang, title, default_name):
     CONFIG_PATH = str(Path.home()) + '/.haruhi'
@@ -131,6 +137,7 @@ def make_save_dir(lang, title, default_name):
 
     return path
 
+
 def find_chapters(lang, data, title, default_name, base_url, headers):
     click.echo('Trying to find chapters with a "{0}" language code'.format(lang))
     result = False
@@ -153,13 +160,15 @@ def find_chapters(lang, data, title, default_name, base_url, headers):
                 click.echo()
         del manga_list
 
+
 def print_version(ctx, _, value):
-    VERSION = '0.8'
+    VERSION = '0.9'
 
     if not value or ctx.resilient_parsing:
         return
     click.echo('Haruhi-Script version {0}'.format(VERSION))
     ctx.exit()
+
 
 @click.command()
 @click.option(
@@ -190,15 +199,16 @@ def print_version(ctx, _, value):
     help='Show version of the haruhi-script'
 )
 def main(manga, language):
-    DEFAULT_NAME = 'haruhi'
-    BASE_URL = 'https://mangadex.org/{0}'
+    DEFAULT_NAME = 'haruhi' # Name for a default folder
+    BASE_URL = 'https://mangadex.org/{0}' # url of a site to parse to
     HEADERS = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/60.0.3112.113 Safari/537.36'
     }
 
-    if len(language) != 2 or not language.isalpha():
+    pattern = re.compile('^[a-z]{2}$') # 2 letter codes only
+    if not re.match(pattern, language):
         exit('Invalid language code format')
 
     manga_id = get_manga_id(manga, BASE_URL)
